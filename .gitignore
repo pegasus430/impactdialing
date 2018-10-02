@@ -23,3 +23,5 @@ spec/fixtures/vcr_cassettes/
 callveyor/app/scripts/config.js
 callveyor/app/scripts/*-templates.js
 .env
+config/database.yml
+config/application.yml
