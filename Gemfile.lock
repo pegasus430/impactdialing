@@ -54,8 +54,6 @@ GEM
       debug_inspector (>= 0.0.1)
     bitmask_attributes (1.0.0)
       activerecord (>= 3.1)
-    bugsnag (6.8.0)
-      concurrent-ruby (~> 1.0)
     builder (3.1.4)
     bullet (5.7.6)
       activesupport (>= 3.0.0)
@@ -458,7 +456,6 @@ DEPENDENCIES
   better_errors
   binding_of_caller
   bitmask_attributes
-  bugsnag
   bullet
   byebug
   cancan (~> 1.6.10)

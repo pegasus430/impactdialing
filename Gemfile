@@ -27,7 +27,7 @@ gem 'uuid', '~> 2.3.7'
 
 # 911
 gem 'pagerduty'
-gem 'bugsnag'
+# gem 'bugsnag'
 
 # ActiveRecord extensions
 gem 'upsert'
