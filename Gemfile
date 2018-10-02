@@ -28,6 +28,7 @@ gem 'uuid', '~> 2.3.7'
 # 911
 gem 'pagerduty'
 # gem 'bugsnag'
+gem 'selenium-webdriver'
 
 # ActiveRecord extensions
 gem 'upsert'
