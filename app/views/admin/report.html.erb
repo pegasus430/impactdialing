@@ -1,0 +1,32 @@
+<div role="main">
+  <h1>Admin Reporting</h1>
+
+  <p>Select the type of usage report you'd like to receive along w/ the date range.</p>
+
+  <%= form_tag ("/admin/report") do %>
+    <fieldset>
+      <p>
+        <label for="report_type">Type:
+          <select id="report_type" name="report_type">
+            <option value="enterprise">Manual / Enterprise Accounts</option>
+            <option value="all">All Accounts</option>
+          </select>
+        </label>
+      </p>
+      <p>
+        <label for="include_undebited">
+          <input type="checkbox" id="include_undebited" name="include_undebited">
+          Include undebited minutes (All accounts only)
+        </label>
+      </p>
+
+    <%= render('client/reports/selective_date_range_picker', {
+      embedded: true,
+      from_date: @date_range.from,
+      to_date: @date_range.to
+    }) %>
+
+    </fieldset>
+    <button type="submit">Build &amp; email report</button>
+  <% end %>
+</div>

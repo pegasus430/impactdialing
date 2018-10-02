@@ -1,0 +1,12 @@
+<% content_for :javascripts do %>
+    <script type ="text/javascript">
+      $(function() {
+        list_upload_form = new ListUploadForm(<%= @campaign.requires_custom_ids? %>);
+        voter_list       = new VoterLists(list_upload_form);
+      });
+    </script>
+<% end %>
+
+<h1><%= @campaign.name %></h1>
+
+<%= render 'form', campaign: @campaign, voter_list_count: @campaign.voter_lists.count %>

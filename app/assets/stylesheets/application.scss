@@ -1,0 +1,283 @@
+@import "introjs";
+@import "style";
+@import "ui-tabs-impactdialing";
+@import "compass/css3/box-shadow";
+
+.inline, .module {
+  vertical-align: top;
+  display: inline-block;
+}
+.align-right {
+  text-align: right;
+}
+.module-container {
+  text-align: left;
+}
+fieldset.module {
+  width: 300px;
+}
+fieldset.loose.module {
+  width: auto;
+}
+div.module {
+  text-align: left;
+}
+.main-content {
+  width: 70%;
+  display: inline-block;
+}
+.sidebar-right {
+  float: right;
+  padding: 0 25px;
+  border-left: 1px solid #e2e2e2;
+  max-width: 30%;
+}
+/**
+  Sidebar media queries
+*/
+@media (max-width: 480px) {
+  .sidebar-right {
+    float: none;
+    border: none;
+    max-width: 100%;
+  }
+  .main-content {
+    width: 100%;
+  }
+}
+@media (min-width: 480px) {
+  .sidebar-right {
+    float: none;
+    border: none;
+    max-width: 100%;
+  }
+  .main-content {
+    width: 100%;
+  }
+}
+@media (min-width: 768px) {
+  .sidebar-right {
+    float: right;
+    border-left: 1px solid #e2e2e2;
+    max-width: 30%;
+  }
+  .main-content {
+    width: 70%;
+  }
+}
+@media (min-width: 992px) {
+}
+@media (min-width: 1382px) {
+}
+@media only screen and (-webkit-min-device-pixel-ratio: 3/2), only screen and (-o-min-device-pixel-ratio: 3/2), only screen and (min-device-pixel-ratio: 3/2) {
+  .sidebar-right {
+    float: none;
+    border: none;
+    max-width: 100%;
+  }
+  .main-content {
+    width: 100%;
+  }
+}
+
+.notice {
+  float: right;
+  max-width: 25%;
+  display: inline-block;
+  background-color: rgb(225,242,254);
+  border : 1px solid rgb(199,224,241);
+  vertical-align: top;
+}
+
+.label {
+  display: inline;
+  padding: .2em .6em .3em;
+  font-size: 75%;
+  font-weight: 700;
+  line-height: 1;
+  color: #fff;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+  border-radius: .25em;
+}
+.label-danger {
+  background-color: #999;
+  color: rgb(194,54,52);
+}
+.label-danger[href]:focus, .label-danger[href]:hover {
+  background-color: #999;
+  color: rgb(194,54,52);
+}
+
+label > input[type="checkbox"], label > input[type="radio"] {
+  vertical-align: middle;
+}
+
+fieldset li {
+  padding: .2em .6em .3em;
+}
+
+fieldset .actions .action {
+  background: #fff;
+  color: #000;
+}
+fieldset .actions a.action:hover {
+  background: #e2e2e2;
+}
+
+fieldset tr:nth-child(odd) th,
+fieldset tr:nth-child(odd) td {
+  background: #f2f2f2;
+}
+
+// All navigation elements
+.admin nav[role="navigation"] {
+  ul {
+    border: none;
+    li:last-child {
+      a {
+        //background-color: #456587;
+        //color: #000;
+      }
+      a.action.primary:hover {
+        //background-color: #e2e2e2;
+        //color: #000;
+        //box-shadow: none;
+      }
+      a.action.secondary:hover {
+        //color: #000;
+      }
+    }
+    li {
+      a {
+        //color: #000;
+      }
+      a.secondary {
+        border: none;
+      }
+      a.action.primary {
+        color: #fff;
+        background-color: #9a2b29;
+        @include box-shadow(0 1px 1px rgba(0,0,0,0.5),inset 0 1px 2px #ba1613,inset 0 -2px 2px #872e2d);
+      }
+      a.action.secondary {
+        background-color: #456587;
+        color: #fff;
+        @include box-shadow(0 1px 1px rgba(0, 0, 0, 0.5), inset 0 1px 2px #7898ba, inset 0 -2px 2px #344c65);
+      }
+      a.action.primary:hover, a.action.secondary:hover {
+        background-color: #e2e2e2;
+        color: #404040;
+        @include box-shadow(0 1px 1px rgba(0,0,0,0.5),inset 0 1px 2px #ebebeb,inset 0 -2px 2px #cfcfcf);
+      }
+    }
+  }
+}
+
+// Main navigation header
+.admin > nav[role="navigation"] {
+  ul {
+    border: 1px solid #e6e6e6;
+    li:last-child {
+      a {
+        background-color: #fff;
+      }
+      a:hover {
+        background-color: #e2e2e2;
+        color: #404040;
+      }
+    }
+    li {
+      a.active {
+        background-color: #9a2b29;
+        color: #fff;
+      }
+      a:hover {
+        background-color: #e2e2e2;
+        color: #404040;
+      }
+    }
+  }
+}
+
+// Per page navigation overrides
+nav.actions {
+  ul {
+    background-color: transparent;
+    border: none;
+
+    li {
+      a:hover {
+        cursor: pointer;
+        background-color: #e2e2e2;
+        color: #404040;
+        @include box-shadow(0 1px 1px rgba(0,0,0,0.5),inset 0 1px 2px #ebebeb,inset 0 -2px 2px #cfcfcf);
+      }
+    }
+  }
+}
+
+header[role="banner"] {
+  nav[role="navigation"] {
+    a.action {
+      position: inherit;
+    }
+  }
+}
+
+/**
+.admin nav.actions li:last-child a {
+  background-color: #f2f2f2;
+  color: inherit;
+}
+*/
+
+/**
+ * Whitelabels
+ */
+header[role="banner"] {
+  h1.impactdialing {
+    margin-bottom : .5em;
+    width : 300px;
+    height : 57px;
+    background : transparent image-url('logos/impactdialing-h1.png') no-repeat 0 0;
+    text-indent : -9999px;
+  }
+  h1.stonesphonesdialer {
+    margin-bottom : .5em;
+    width : 300px;
+    height : 57px;
+    background : transparent image-url('logos/stonesphonesdialer-h1.png') no-repeat 0 0;
+    text-indent : -9999px;
+  }
+  h1.afpdialer {
+    margin-bottom : .5em;
+    width : 300px;
+    height : 57px;
+    background : transparent image-url('logos/afpdialer-h1.png') no-repeat 0 0;
+    text-indent : -9999px;
+  }
+  h1.gettangent {
+    margin-bottom : .5em;
+    width : 300px;
+    height : 57px;
+    background : transparent image-url('logos/gettangent-h1.png') no-repeat 0 0;
+    text-indent : -9999px;
+  }
+  h1.activistcentral-lfpd {
+    margin-bottom : .5em;
+    width : 300px;
+    height : 60px;
+    background : transparent image-url('logos/activistcentral-lfpd-h1.png') no-repeat 0 0;
+    text-indent : -9999px;
+  }
+  h1.callspex {
+    margin-bottom : .5em;
+    width : 300px;
+    height : 60px;
+    background : transparent image-url('logos/callspex-h1.png') no-repeat 0 0;
+    text-indent : -9999px;
+  }
+}
+

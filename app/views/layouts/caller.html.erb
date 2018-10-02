@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+  <%= render 'layouts/head' %>
+
+  <body class="admin clearfix">
+    <header role="banner" class="clearfix">
+      <% if !logged_in_as_caller? %>
+        <%= render 'layouts/caller_logo' %>
+      <% end %>
+    </header>
+
+    <%= render :partial => "layouts/flash_messages", :locals => {:display => [:notice, :error, :warning]} %>
+
+    <div class="content clearfix">
+      <%= yield %>
+    </div>
+
+    <footer role="contentinfo" class="clearfix">
+      <%= render 'layouts/legal' %>
+    </footer>
+  </body>
+</html>

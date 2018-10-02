@@ -1,0 +1,63 @@
+<% content_for :javascripts do %>
+  <%= javascript_include_tag "https://js.stripe.com/v1/"%>
+  <%= javascript_include_tag  'client/billing/subscription.js' %>
+<% end %>
+
+<div class="callout alert clearfix" style="display:none" id="payment-flash">
+</div>
+
+<p id="callers-warning" style="display:none;" class="callout alert"></p>
+
+<%= form_for @subscription, {
+      url: client_billing_subscription_path,
+      method: "PUT",
+      html: {
+        id: "plan-form"
+      }
+    } do |f| %>
+  <fieldset>
+    <legend>Plan</legend>
+    <div>
+      <% if @subscription.plan == 'trial' || @subscription.plan != 'per_minute' %>
+          <p class="callout notice clearfix">
+            You will be able to change between Basic, Pro and Business plans as well as from Per minute to Basic, Pro or Business at anytime from here. Changes between Basic, Business and Pro are prorated. Changes from Per minute to Basic, Business or Pro are not prorated but you will retain the previously purchased minutes until the end of the new billing cycle.
+          </p>
+          <p class="callout notice clearfix">
+            If you sign-up for a Basic, Pro or Business plan and later decide the Per minute plan is a better fit please contact us at <a href="mailto:<%= SUPPORT_EMAIL %>"><%= SUPPORT_EMAIL %></a> and we'll be happy to get you setup.
+          </p>
+      <% end %>
+      <p>
+        <label for="subscription_type">Select plan:</label>
+        <select name="plan" id="subscription_type" data-value="<%= @subscription.plan %>">
+          <%= options_for_select subscription_type_options_for_select(@subscription, @quota.minutes_available),
+                                 @subscription.plan %>
+        </select>
+      </p>
+    </div>
+    <div id="num_of_callers_section">
+      <label for="number_of_callers">Number of callers:</label>
+      <input type="text"  class="field" style="width:50px" name="caller_seats" id="number_of_callers" value="<%= @quota.callers_allowed.zero? ? 1 : @quota.callers_allowed %>" data-value="<%= @quota.callers_allowed %>"/>
+      <p id="cost-subscription" style="display:none;">
+        $<span id="monthly-cost"></span> per month
+      </p>
+    </div>
+
+    <p id="add_to_balance" style="display:none">
+      <label for="subscription_amount">Add to balance:</label>
+      $ <input type="text" id="subscription_amount" class="field" style="width:50px" name="amount_paid"/>
+    </p>
+  </fieldset>
+  <p>
+    <div class="buttons">
+      <button type="submit">Upgrade</button>
+    </div>
+  </p>
+<% end %>
+
+<% content_for :javascripts do %>
+  <script type="text/javascript">
+    $(function($) {
+      var subscriptions = new Subscriptions();
+    });
+  </script>
+<% end %>

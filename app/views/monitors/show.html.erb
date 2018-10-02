@@ -1,0 +1,18 @@
+<% content_for :javascripts do %>
+<script type="text/javascript" src="https://static.twilio.com/libs/twiliojs/1.1/twilio.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
+<%= javascript_include_tag  'monitors/monitors', 'monitors/assign_caller_to_campaign' %>
+
+<% end %>
+<input id= "campaign_id" type="hidden" value="<%= @campaign.id %>">
+<input id= "monitor_session_id" type="hidden" value="<%= @monitor_session %>">
+<%= render :partial => 'campaign' %>
+<%= render :partial => 'callers' %>
+
+<script type="text/javascript">
+  var monitors = new Monitors()
+  monitors.setup_twilio("<%= @token %>")
+  $(window).bind("beforeunload", function(){
+    monitors.de_activate_monitor("<%= @campaign.id %>", $('#monitor_session_id').val());
+  });
+</script>

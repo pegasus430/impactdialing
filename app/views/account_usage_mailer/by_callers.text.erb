@@ -1,0 +1,36 @@
+<%
+  def padding(headers, values)
+    longest = 0
+    (headers + values).each{|str| longest = str.size > longest ? str.size : longest}
+    longest += 5
+  end
+  col1_headers = ['Name', 'Abandoned calls', 'Voicemails / Hangups']
+  row1_headers = [
+    'Name', 'Total', 'Leads', 'Caller'
+  ]
+  names = @callers.map(&:identity_name)
+  pads = row1_headers.map{|h| padding([h], @billable_totals.values)}
+-%>
+Billable minutes by caller
+
+<% row1_headers.each_with_index do |header, i| %>
+<%= header.ljust(pads[i]) %> 
+<% end %>
+
+<% @callers.each do |caller| %>
+<% usage = CallerUsage.new(caller, caller.campaign, @from_date, @to_date) %>
+<%= caller.identity_name.ljust(pads[0]) %>
+<%= (@billable_totals[caller.id] || 0).to_s.ljust(pads[1]) %>
+<%= usage.lead_time.to_s.ljust(pads[2]) %>
+<%= usage.caller_time.to_s.ljust(pads[3]) %>
+<% end %>
+
+
+<%= 'Abandoned calls'.ljust(pads[0]) %> <%= @status_totals[CallAttempt::Status::ABANDONED] || 0 %>
+
+
+
+<%= 'Voicemails / Hangups'.ljust(pads[0]) %> <%= (@status_totals[CallAttempt::Status::VOICEMAIL].to_i || 0) +
+        (@status_totals[CallAttempt::Status::HANGUP].to_i || 0) %>
+
+Total <%= @grand_total %>

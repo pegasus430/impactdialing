@@ -1,0 +1,10 @@
+<h1><%= @caller.name %> Usage</h1>
+<div role="main">
+  <%= form_tag(usage_callers_phones_only_index_path, method: :get) do %>
+    <%= select_tag 'campaign_id', options_for_select(@campaigns_data, selected: @campaign.try(:id)), prompt: 'Total' %>
+    <%= render 'shared/switch_campaign' %>
+    <%= render 'shared/utilization', report: @caller, usage: @caller_usage %>
+    <%= render 'shared/callers_billable', usage: @caller_usage %>
+    <%= render 'shared/date_picker_callers', caller: @caller, campaign: @campaign %>
+  <% end %>
+</div>

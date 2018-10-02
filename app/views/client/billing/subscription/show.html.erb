@@ -1,0 +1,107 @@
+<h1>Billing</h1>
+<% if @subscription.canceled? %>
+  <p>
+    You have cancelled your subscription.
+  </p>
+  <p>
+    Looking to re-subscribe? Yay! Get in touch at <a href="mailto:<%= SUPPORT_EMAIL %>"><%= SUPPORT_EMAIL %></a>.
+  </p>
+<% else %>
+  <p>
+    Your current plan is
+    <b><%= subscription_human_type(@subscription.plan) %></b>.
+  </p>
+
+  <p>
+    <%= subscription_quota_summary(@subscription, @quota) %>
+  </p>
+
+  <% if @subscription.provider_start_period && @subscription.provider_end_period %>
+    <p>
+      Billing period: <b><%= subscription_date(@subscription.provider_start_period) %></b> to
+      <b><%= subscription_date(@subscription.provider_end_period) %></b>
+    </p>
+  <% end %>
+
+  <% if @subscription.plan != 'enterprise' && @subscription.plan != 'per_minute' %>
+    <p>
+      Caller seats: <b><%= @quota.callers_allowed %></b>
+    </p>
+  <% end %>
+
+  <p>Card on file: <b><%= credit_card_on_file(@credit_card) %></b></p>
+
+  <% if @subscription.autorecharge_active? %>
+    <p>
+      <b><%= number_to_currency(@subscription.autorecharge_amount, precision: 0) %></b>
+      (<%= @subscription.autorecharge_minutes %> minutes) will be automatically added when there are less than <b><%= @subscription.autorecharge_trigger %></b> Minutes left.
+    </p>
+  <% end %>
+
+  <nav role="navigation">
+    <ul class="actions" style="list-style: none;">
+      <% subscription_buttons(@subscription).each do |button| %>
+      <li><%= link_to(*button) %></li>
+      <% end %>
+    </ul>
+  </nav>
+
+  <% if can? :add_minutes, @subscription %>
+    <div style="clear: left; padding-top: 18px;">
+      <h3>Add funds</h3>
+      <fieldset>
+      <%= form_for(@subscription, url: client_billing_subscription_path) do %>
+        <p>
+          <label for="subscription_amount">
+            Dollars to add (<%= number_to_currency @subscription.price_per_quantity %> /minute)
+          </label>
+          <input  type="text" name="amount_paid" value="" id="subscription_amount">
+        </p>
+        <div class="buttons">
+          <button type="submit">Add funds</button>
+        </div>
+      <% end -%>
+    </div>
+
+    <div>
+      <h3>Auto-recharge</h3>
+      <%= form_for @subscription, url: client_billing_subscription_path do |f| %>
+        <fieldset>
+          <p style="font-size: 18px;">
+            <span style="margin-right: 16px;">
+            <%= label_tag 'autorecharge[enabled]', {
+              :for => 'autorecharge_enabled_1',
+              :style=>"display:inline;"
+            } do %>
+              <%= radio_button_tag 'autorecharge[enabled]', 1, @subscription.autorecharge_active? %> On
+            <% end %>
+            </span>
+            <span>
+            <%= label_tag 'autorecharge[enabled]', {
+              :for => 'autorecharge_enabled_0',
+              :style=>"display:inline;"
+            } do %>
+              <%= radio_button_tag 'autorecharge[enabled]', 0, !@subscription.autorecharge_active? %> Off
+            <% end %>
+            </span>
+          </p>
+          <p>
+            <label for="autorecharge_trigger">
+              If <i>Minutes left</i> falls below (must be greater than 0)
+            </label>
+            <%= text_field_tag 'autorecharge[trigger]', @subscription.autorecharge_trigger %>
+          </p>
+          <p>
+            <label for="autorecharge_amount">
+              Then <i>Add funds</i>, spending
+            </label>
+            <%= text_field_tag 'autorecharge[amount]', @subscription.autorecharge_amount %>
+          </p>
+          <div class="buttons">
+            <button type="submit">Save</button>
+          </div>
+        </fieldset>
+      <% end %>
+    </div>
+  <% end %>
+<% end %>

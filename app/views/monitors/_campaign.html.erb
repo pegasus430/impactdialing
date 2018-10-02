@@ -1,0 +1,22 @@
+<h2><%= @campaign.name %></h2>
+<div class="table">
+  <table id="campaign_table">
+    <tr class="">
+      <th>Callers logged in</th>
+      <th>On Call</th>
+      <th>Wrap up</th>      
+      <th>On hold</th>            
+      <th>Ringing lines</th>      
+      <th>Numbers Available</th>
+    </tr>
+
+    <tr id="campaign_info" class="campaign <%= cycle("odd", "even") %>">
+      <td id="callers_logged_in"><%= @campaign_result['callers_logged_in'] %></td>
+      <td id="on_call"><%= @campaign_result['on_call'] %></td>       
+      <td id="wrap_up"><%= @campaign_result['wrap_up'] %></td>       
+      <td id="on_hold"><%= @campaign_result['on_hold'] %></td>                 
+      <td id="ringing_lines"><%= @campaign_result['ringing_lines'] %></td>              
+      <td id="numbers_available"><%= @campaign_result['available'] %></td>
+    </tr>
+  </table>
+</div>

@@ -1,0 +1,164 @@
+<!doctype html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Impact Dialing</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    <!-- build:css /callveyor/styles/vendor.css -->
+    <link rel="stylesheet" href="styles/bootstrap.css">
+    <link rel="stylesheet" href="styles/bootstrap-theme.css">
+    <!-- bower:css -->
+    <!-- endbower -->
+    <!-- endbuild -->
+    <!-- build:css({.tmp,app}) /callveyor/styles/main.css -->
+    <link rel="stylesheet" href="styles/main.css">
+    <!-- endbuild -->
+
+    <!-- bugsnag -->
+    <script
+      src="//d2wy8f7a9ursnm.cloudfront.net/bugsnag-2.min.js"
+      data-apikey="aa2f044deb63547b4d9e0cfe142b1703">
+    </script>
+    <!-- /bugsnag -->
+
+    <!-- UserSnap -->
+    <script>
+      var _usersnapconfig = {
+        apiKey: 'ee7280e5-4afa-4854-87a6-b19d6c1cf460',
+        valign: 'bottom',
+        halign: 'left',
+        beforeSend: function(obj) {
+          obj.addInfo = window.idDebugData || {};
+        }
+      };
+
+      (function() {
+        var s = document.createElement("script");
+        s.type = "text/javascript";
+        s.async = true;
+        s.src = '//api.usersnap.com/beta/'+
+               'ee7280e5-4afa-4854-87a6-b19d6c1cf460.js';
+        var x = document.getElementsByTagName('head')[0];
+        x.appendChild(s);
+      })();
+    </script>
+    <!-- /UserSnap -->
+  </head>
+  <body data-ng-app="callveyor">
+    <!--[if lt IE 9]>
+      <p class="browsehappy">You are using an <strong>unsupported or outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+
+    <!-- Site or application content here -->
+    <div class="fluid-wrap">
+      <div class="container-fluid" data-ng-controller="AppCtrl">
+        <!-- dialer ui-view -->
+        <nav class="navbar navbar-default navbar-fixed-top ng-cloak" role="navigation" data-ui-view>
+          <div class="container-fluid">
+            <div class="row">
+                <div class="col-xs-6 col-sm-4"></div>
+                <div class="col-xs-0 col-sm-4">
+                    <div data-id-user-messages></div>
+                  </div>
+                <div class="col-xs-6 col-sm-4">
+                    <span data-id-logout class="navbar-right"></span>
+                  </div>
+              </div>
+          </div>
+        </nav>
+        <!-- /dialer ui-view -->
+        <div class="row">
+          <div class="col-xs-12 col-md-4" data-ng-controller="HouseholdCtrl">
+            <!-- contactInfo ui-view -->
+            <div class="fixed-contact-container" data-id-household></div>
+            <!-- /contactInfo ui-view -->
+          </div>
+          <!-- survey -->
+          <div class="col-xs-12 col-md-8">
+            <div class="row script" data-id-survey>
+              If this message doesn't disappear, something is blocking JavaScript from loading on this page.
+              If you're using an ad blocking service, try disabling it.
+              You can also try using another web browser.
+            </div>
+          </div>
+          <!-- /survey -->
+        </div>
+
+      </div>
+      <!-- /container-fluid -->
+    </div>
+    <!-- /fluid-wrap -->
+
+    <!-- Footer -->
+    <footer>
+      <ul role="navigation">
+        <li>
+          <a href="https://impactdialing.freshdesk.com/support/solutions/folders/1000049875" target="_blank">
+            Instructions &amp; Troubleshooting
+          </a>
+        </li>
+        <li>
+          <a href="/client/tos/policies#privacy" target="_blank">Privacy</a>
+        </li>
+        <li>
+          <a href="/client/tos/policies#terms" target="_blank">Terms</a>
+        </li>
+        <li data-ng-controller="MetaCtrl">
+          <span class="ng-cloak">&copy; {{currentYear}}</span>
+        </li>
+      </ul>
+    </footer>
+    <!-- /Footer -->
+
+    <!--[if lt IE 9]>
+    <!-- build:js /callveyor/scripts/ie-lt-9.js -->
+    <script src="bower_components/es5-shim/es5-shim.js"></script>
+    <script src="bower_components/json3/lib/json3.min.js"></script>
+    <!-- endbuild -->
+    <![endif]-->
+
+    <!-- build:js({.tmp,app}) /callveyor/scripts/libs.js -->
+    <!-- bower:js -->
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/angular-pusher/angular-pusher.js"></script>
+    <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+    <script src="bower_components/spin.js/spin.js"></script>
+    <script src="bower_components/angular-spinner/angular-spinner.js"></script>
+    <!-- endbower -->
+    <!-- endbuild -->
+
+    <!-- build:js({.tmp,app}) /callveyor/scripts/app.js -->
+    <script src="custom_components/ui-bootstrap-custom-tpls-0.14.2.min.js"></script>
+    <script src="scripts/jquery.js"></script>
+    <script src="scripts/config.js"></script>
+    <script src="scripts/app.js"></script>
+    <script src="scripts/common/id_device_detect.js"></script>
+    <script src="scripts/common/id_cache_factories/id_cache_factories.js"></script>
+    <script src="scripts/common/transition_gateway/transition_gateway.js"></script>
+    <script src="scripts/common/janitor/janitor.js"></script>
+    <script src="scripts/dialer/pusher_connection_factory.js"></script>
+    <script src="scripts/dialer/twilio_connection_factory.js"></script>
+    <script src="scripts/call_flow/call_flow.js"></script>
+    <script src="scripts/services/id_script_loader.js"></script>
+    <script src="scripts/services/id_twilio_client.js"></script>
+    <script src="scripts/http_dialer/http_dialer.js"></script>
+    <script src="scripts/common/id_flash/id_flash.js"></script>
+    <script src="scripts/dialer/dialer.js"></script>
+    <script src="scripts/dialer/contact/contact.js"></script>
+    <script src="scripts/dialer/household/household.js"></script>
+    <script src="scripts/survey/survey.js"></script>
+    <script src="scripts/dialer/ready/ready.js"></script>
+    <script src="scripts/dialer/hold/hold.js"></script>
+    <script src="scripts/dialer/active/active.js"></script>
+    <script src="scripts/dialer/active/transfer/transfer.js"></script>
+    <script src="scripts/dialer/wrap/wrap.js"></script>
+    <script src="scripts/dialer/stop/stop.js"></script>
+    <!-- endbuild -->
+</body>
+</html>

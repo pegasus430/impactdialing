@@ -1,0 +1,44 @@
+<% if !@campaign.account.recordings.blank? %>
+  <div id="sndPreview" style="vertical-align: middle;"></div>
+  <%= content_for :javascripts do %>
+    <script type="text/javascript">
+      function updatePreview() {
+        var path = '';
+        var recording_id = $("#campaign_recording_id").val();
+        <% @account.recordings.each do |recording| %>
+          if( recording_id == <%= recording.id %> ) {
+            path        = '<%= recording.file.url %>';
+            name        = '<%= escape_javascript recording.name %>';
+            contentType = '<%= recording.file.content_type %>';
+          }
+        <% end %>
+
+        var fallbackMessage = '<p>Your browser does not support audio previews. ' +
+                              'You can <a href="' + path + '">download ' + name + '</a> ' +
+                              'to verify it was uploaded correctly.</p>';
+        var audioPreview = '<p>Previewing <b>' + name + '</b></p>' +
+                           '<audio controls>' +
+                           '<source src="' + path + '">' +
+                           fallbackMessage + 
+                           '</audio>';
+        // IE9 breaks trying to create audio element
+        // so use try/catch to allow fallback msg display
+        try {
+          var audioTag = document.createElement('audio');
+          if (!(!!(audioTag) && !!(audioTag.canPlayType) && ("no" != audioTag.canPlayType(contentType)) && ("" != audioTag.canPlayType(contentType)))) {
+            audioPreview = fallbackMessage;
+          }
+        } catch (e) {
+          audioPreview = fallbackMessage;
+        }
+
+        $('#sndPreview').html(audioPreview);
+      }
+
+      $(function() {
+        updatePreview();
+        $("#campaign_recording_id").change(updatePreview);
+      });
+    </script>
+  <% end %>
+<% end %>

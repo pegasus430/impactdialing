@@ -1,0 +1,234 @@
+<%= content_for :javascripts do %>
+  <%= javascript_include_tag 'campaign/campaign', 'campaign/list_upload_form',
+    'campaign/voter_lists', 'form_helpers/grouped_selects', 'jquery.form' %>
+
+  <script type="text/javascript">
+    $(function(){
+      campaign = new Campaign();
+      tabInst = $('#campaign-tabs').tabs();
+      $('#campaign-tabs').show();
+      introJsSteps = [
+        {
+          step: 1,
+          intro: "Give your campaign a name.",
+          element: '#campaign_name_container'
+        },
+        {
+          step: 2,
+          intro: "Choose the Caller ID to be displayed on outgoing calls. The law requires that this be a real number associated with your business or organization.",
+          element: '#campaign_caller_id_container'
+        },
+        {
+          step: 3,
+          intro: "Choose which script your callers should use.",
+          element: '#campaign_script_container'
+        },
+        {
+          step: 4,
+          intro: "There are three dialing modes. Preview mode shows the name of"+
+                 " the lead and lets your caller choose to dial or skip"+
+                 " it. Power mode dials a new lead immediately after the"+
+                 " previous one is finished. Predictive mode will dial more"+
+                 " lines than you have callers, intelligently adapting to the"+
+                 " answer rate and conversation length; occasionally, however,"+
+                 " a call will be answered when no caller is available."+
+                 " Predictive should generally only be used when at least five"+
+                 " callers are calling at the same time.",
+          element: '#campaign_dial_mode_container'
+        },
+        {
+          step: 5,
+          intro: "Choose what time zone you're calling so that the correct time"+
+                 " is used for the dialing hours and reports.",
+          element: '#campaign_time_zone_container'
+
+        },
+        {
+          step: 6,
+          intro: "Outside of the dialing hours, the dialer won't make calls.",
+          element: '#campaign_dialing_hours_container'
+        },
+        {
+          step: 7,
+          intro: "The time between call attempts sets the minimum amount of"+
+                 " time before calling somebody back.",
+          element: '#campaign_recycle_rate_container'
+        },
+        {
+          step: 8,
+          intro: "If answering machine detection is off, any calls answered"+
+                 " before 15 seconds of ringing will be immediately connected to a caller."+
+                 "After 15 seconds, the call will be hung up. If answering machine detection"+
+                 "is on, the call will ring for up to 30 seconds. If it is answered,"+
+                 " the detection system will listen to the call for about two"+
+                 " seconds, and connect it to a caller if it is a human. If it"+
+                 " is a machine, it will play a message if you have chosen to do"+
+                 "so, or hang up.",
+          element: '#campaign_answering_machine_detect_container'
+        },
+        {
+          step: 9,
+          intro: "Hang-up or play a recorded message when an"+
+                  " answering machine is detected. Recorded messages"+
+                  " can be uploaded below.",
+          element: '#campaign_use_recordings_container',
+        },
+        {
+          step: 10,
+          intro: "Callers will see a 'Drop message' button that will play the"+
+                  " selected recording. Particularly useful if the call is"+
+                  " answered by a machine.",
+          element: '#campaign_caller_can_drop_message_manually_container',
+        },
+        {
+          step: 11,
+          intro: "Whether to dial a phone number again after dropping a message.",
+          element: '#campaign_call_back_after_voicemail_delivery_container',
+        },
+        {
+          step: 12,
+          intro: "The recorded message to play when caller drops a message"+
+                  " or an answering machine is detected.",
+          element: '#campaign_recording_id_container',
+        },
+        {
+          step: 13,
+          intro: "A list of leads to upload.",
+          element: '#upload_datafile_container',
+        },
+        {
+          step: 14,
+          intro: "This is the name that will display below when the file has uploaded.",
+          element: '#list_name',
+        },
+        {
+          step: 15,
+          intro: "Leads in the uploaded file will be added to the campaign call list.",
+          element: '#voter_list_purpose_add_container',
+        },
+        {
+          step: 16,
+          intro: "Detect any phone numbers of cellular devices and mark them not to be called.",
+          element: '#voter_list_skip_wireless_container',
+        },
+        {
+          step: 17,
+          intro: "Phone numbers in the uploaded file will be removed from the campaign call list."+
+            " This does not affect reports.",
+          element: '#voter_list_purpose_remove_numbers',
+        },
+        {
+          step: 18,
+          intro: "Leads with IDs corresponding to those in the uploaded file"+
+            " will be removed from the campaign call list. This does"+
+            " affect reports.",
+          element: '#voter_list_purpose_remove_leads',
+        },
+      ];
+      var tabsHelper = {
+        show: function(id) {
+                var ids     = ['#settings', '#messages', '#upload', '#info'];
+                var classes = 'ui-tabs-active ui-state-active';
+                var cssMethod = '';
+                var visMethod = '';
+                $.each(ids, function(_, _id) {
+                    cssMethod = id == _id ? 'addClass' : 'removeClass';
+                    visMethod = id == _id ? 'show' : 'hide';
+                    console.log('tabsHelper', _id, cssMethod);
+                    $('a[href=' + _id + ']').parent()[cssMethod](classes);
+                    $(_id)[visMethod]();
+                })
+              },
+
+      };
+      var introJsBeforeChangeCallbacks = {
+        campaign_name_container: function(targetEl) {
+                                           tabsHelper.show('#settings');
+                                         },
+        campaign_recycle_rate_container: function(targetEl) {
+                                           tabsHelper.show('#settings');
+                                         },
+        campaign_answering_machine_detect_container: function(targetEl) {
+                                                       tabsHelper.show('#messages');
+                                                     },
+        campaign_recording_id_container: function(targetEl) {
+                                           tabsHelper.show('#messages');
+                                         },
+        upload_datafile_container: function(targetEl) {
+                                     tabsHelper.show('#upload');
+                                   },
+      };
+
+      introJsBeforeChange = function(targetEl) {
+        var method = $(targetEl).attr('id');
+        console.log('introJsBeforeChange', $(targetEl).attr('id'), method);
+        if( $.isFunction(introJsBeforeChangeCallbacks[method]) ){
+          console.log('calling');
+          introJsBeforeChangeCallbacks[method]( $(targetEl) );
+        }
+      };
+
+      // Disable upload options as needed
+      <% if voter_list_count.zero? %>
+        $('#list_upload_options input[type="radio"]').prop('disabled', true);
+      <% end %>
+    });
+
+  </script>
+<% end %>
+
+<div class="main-content">
+  <%= render "shared/error_messages", :target => @campaign %>
+
+  <div id="campaign-tabs" style="display: none;">
+    <ul>
+      <li><a href="#settings">Settings</a></li>
+      <li><a href="#messages">Messages</a></li>
+      <li><a href="#upload">Upload</a></li>
+      <li><a href="#list">List stats</a></li>
+    <% if @campaign.lists.disabled.count > 0 %>
+      <li><a href="#disabled-lists">Disabled lists</a></li>
+    <% end %>
+    </ul>
+
+    <%= form_for @campaign, url: "#{client_campaigns_path}/#{@campaign.id}" do |form| %>
+      <div id="settings" style="display: none;">
+        <%= render 'settings', form: form %>
+      </div>
+
+      <div id="messages" style="display: none;">
+        <%= render 'messages', form: form %>
+      </div>
+    <% end %>
+
+    <div id="upload" style="display: none;">
+      <% unless @campaign.new_record? %>
+        <%= render 'upload_form', campaign: campaign, voter_list_count: voter_list_count %>
+
+        <div class="clearfix">
+          <%= render 'upload_history' if @campaign.voter_lists.count > 0 %>
+        </div>
+      <% else %>
+        <p>Lists can be uploaded once the campaign has been saved.</p>
+      <% end %>
+    </div>
+
+    <div id="list" style="display: none;">
+      <% if dials_summary.present? %>
+        <%= dials_summary %>
+        <hr />
+        <%= dial_passes({
+          heading: 'Passes',
+        }) %>
+      <% else %>
+        <p>This will display once the campaign is saved.</p>
+      <% end %>
+    </div>
+
+  <% if @campaign.lists.disabled.count > 0 %>
+    <div id="disabled-lists" style="display: none;">
+      <%= render 'disabled_lists' %>
+    </div>
+  <% end %>
+  </div>
+</div>

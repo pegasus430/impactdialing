@@ -1,0 +1,43 @@
+<h1>Do Not Call list</h1>
+
+<%= form_for BlockedNumber.new do |f| %>
+  <fieldset>
+  <legend>Add number</legend>
+    <p data-intro="Add a phone number here." data-step="1">
+      <%= f.label :number %>
+      <%= f.text_field :number %>
+    </p>
+    <p data-intro="Choose whether the number should be blocked for the entire system, or just one campaign." data-step="2">
+      <%= f.label :level, for: 'blocked_number_campaign_id' %>
+      <%= f.select :campaign_id, [["System", nil]] + @campaigns.map{|c| [c.name, c.id]} %>
+    </p>
+    <div class="actions">
+      <button type="action primary">Add</button>
+    </div>
+  </fieldset>
+<% end %>
+
+<% if @blocked_numbers.any? %>
+  <table id="do_not_call_list">
+    <tr>
+      <th>Phone</th>
+      <th>DNC level</th>
+      <th width="55" class="ac"></th>
+    </tr>
+    <% @blocked_numbers.each do |blocked_number| %>
+      <tr id="blocked_number_<%= blocked_number.id %>">
+        <td><%= blocked_number.number %></td>
+        <td><%= blocked_number.campaign ? blocked_number.campaign.name : 'System' %></td>
+        <td><%= link_to '',
+                blocked_number_path(blocked_number),
+                :data => {
+                  :confirm => 'Are you sure you want to remove this number from the Do Not Call list?',
+                },
+                :method => :delete,
+                :class => "ico del",
+                :title => "Remove number from DNC" %></td>
+      </tr>
+    <% end %>
+  </table>
+  <p><%= page_entries_info @blocked_numbers %> <%= will_paginate @blocked_numbers %></p>
+<% end %>

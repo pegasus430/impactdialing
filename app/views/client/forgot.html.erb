@@ -1,0 +1,13 @@
+<h1>Reset password</h1>
+				<fieldset>
+
+				<%= form_tag("/client/forgot", :id=>"loginForm") do |f| %>
+			      <p>
+			        <label>Email</label>
+					<input type="text" name="email" class="field" value="<%= params[:email] %>" />
+			      </p>
+				<div class="buttons">
+				<button type="submit">Reset</button>
+				</div>
+				</fieldset>
+		<% end %>

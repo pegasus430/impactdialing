@@ -1,0 +1,59 @@
+<% content_for :campaigns_data do %>
+  data-intro="After you create a script, set up a campaign." data-step="4"
+<% end %>
+
+<h1>Scripts</h1>
+<% if @scripts.empty? %>
+  <p>No scripts entered.</p>
+<% else %>
+  <table data-intro="This is a list of all the scripts you have created." data-step="2">
+    <tr>
+      <th>Name</th>
+      <th>Date added</th>
+      <th width="90"></th>
+      <th width="55"></th>
+    </tr>
+    <% @scripts.each do |s| %>
+      <tr>
+        <td><strong><%= link_to s.name, edit_client_script_path(s) %></strong></td>
+        <td><%= s.created_at.strftime("%m/%d/%Y") %></td>
+
+        <td><%= link_to "Duplicate", new_client_script_path(script_id: s.id) %></td>
+
+        <td><%= link_to '',
+                client_script_path(s),
+                :data => {
+                  :confirm => 'Are you sure you want to archive this script?'
+                },
+                :method => :delete,
+                :class => "ico del" %></td>
+      </tr>
+    <% end %>
+  </table>
+  <p><%= page_entries_info @scripts, model: 'script' %> <%= will_paginate @scripts %></p>
+<% end %>
+
+<p><strong>Phones-only users: </strong>The "Phones-only keypad" values refer to the buttons that your callers press on their phones to enter results after each call. Callers can press * to hang up the current call, then enter their results on their keypad and press * again to submit each result.</p>
+
+<nav role="navigation" class="actions clearfix">
+  <ul class="clearfix">
+    <li>
+      <%= link_to('Add new script', new_client_script_path, {
+            :class => 'action primary',
+            :data => {
+              "intro" => "Click here to create a new script.",
+              "step" => "1"
+            }
+      }) %>
+    </li>
+    <li>
+      <%= link_to('View archived scripts', client_archived_scripts_path, {
+            :class => 'action secondary',
+            :data => {
+              "intro" => "Click here to view and restore your archived scripts.",
+              "step" => "3"
+            }
+      }) %>
+    </li>
+  </ul>
+</nav>

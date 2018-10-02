@@ -1,0 +1,52 @@
+<div class="modal-header">
+    <h3 class="modal-title">Choose your path</h3>
+</div>
+
+<div class="modal-body">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-6">
+                <h4>Dial-in</h4>
+                <p>
+                  <b>Dial:</b> {{ready.call_station.phone_number}}
+                </p>
+                <p>
+                  <b>PIN:</b> {{ready.caller.pin}}
+                </p>
+
+                <p>
+                    <b>Dial</b> the above number from a cell or landline then key in your <b>PIN</b> when prompted. Then press <b>*</b> to start calling.
+                </p>
+            </div>
+            <div class="col-sm-6">
+                <h4>Browser phone</h4>
+                <div class="btn-group btn-group-justified">
+                    <div class="btn-group">
+                        <button class="btn btn-primary navbar-btn"
+                                data-ng-click="ready.startCalling()"
+                                data-ng-disabled="transitionInProgress">
+                          Start calling
+                        </button>
+                    </div>
+                </div>
+                <p><em>Not supported by iOS or Internet Explorer 9-. Requires <a href="https://get.adobe.com/flashplayer/" target="_blank">Flash</a> on Internet Explorer 10+ and Safari.</em></p>
+                <div class="alert alert-info">
+                    <p>
+                        Before calling, make sure:
+                        <ol class="bump-left">
+                            <li>
+                                Your computer has a built-in microphone or a headset plugged in
+                            </li>
+                            <li>
+                                You complete our telco's <a href="https://networktest.twilio.com/" target="_blank">bandwidth test</a> to see if your network can support at least one connection (doesn't support Internet Explorer or Safari)
+                            </li>
+                        </ol>
+                    </p>
+                </div>
+                <p class="alert alert-warning">
+                    <em>Poor voice quality and dropped calls are symptoms of a poor internet connection. Try dialing in instead.</em>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>

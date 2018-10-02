@@ -1,0 +1,8 @@
+--color
+--profile
+--require spec_helper
+--require byebug
+--require rspec/legacy_formatters
+--require rspec/instafail
+--format RSpec::Instafail
+--format progress

@@ -1,0 +1,192 @@
+# Files in the config/locales directory are used for internationalization
+# and are automatically loaded by Rails. If you want to use locales other
+# than English, add the necessary files in this directory.
+#
+# To use the locales, use `I18n.t`:
+#
+#     I18n.t 'hello'
+#
+# In views, this is aliased to just `t`:
+#
+#     <%= t('hello') %>
+#
+# To use a different locale, set it with `I18n.locale`:
+#
+#     I18n.locale = :es
+#
+# This would use the information in config/locales/es.yml.
+#
+# To learn more, please read the Rails Internationalization guide
+# available at http://guides.rubyonrails.org/i18n.html.
+
+en:
+  csv_validator:
+    missing_header_or_rows: "Please verify the file contains at least 1 header row and 1 data row."
+    duplicate_headers: "Headers must be unique. Duplicate headers: %{duplicate_headers}."
+    malformed: "Your file was invalid. Make sure to use a valid CSV or TSV file."
+  csv_mapping:
+    multiple_mapping: "Two columns in the uploaded file were mapped to the same destination. Make sure to only map one column to each field."
+    missing_phone: "You did not map any column in the uploaded file to the Phone field."
+  activerecord:
+    successes:
+        models:
+          caller:
+            reassigned: "Caller has been reassigned. It will take a few minutes to update online callers."
+            saved: "Caller saved."
+            archived: "Caller archived."
+            restored: "Caller restored."
+          caller_group:
+            reassigned: "Caller Group has been reassigned. It will take a few minutes to update online callers."
+            saved: "Caller Group saved."
+            deleted: "Caller Group deleted."
+    attributes:
+      campaign:
+        recycle_rate: 'Time (in hours) between call attempts'
+    errors:
+      models:
+        blocked_number:
+          too_long: "Number is too long (max 16 digits)"
+          too_short: "Number is too short (min 10 digits)"
+          not_a_number: "Number must contain only digits, - (hyphens), () (paranthesis) or + (plus signs)"
+          taken: "%{value} is already in the specified Do Not Call list"
+        voter_list:
+          general_error: "An error occurred while processing your uploaded list. You may have fields that contain large amounts of data. Try uploading again and select Discard for columns that contain more than 2 or 3 sentences."
+          custom_id_map_prohibited: "Lists for this campaign cannot map to the system ID field because the first list did not."
+          custom_id_map_required: "Lists for this campaign must map to the system ID field because the first list did."
+  blocked_number_created: "%{number} successfully added to Do Not Call list for %{level}."
+  blocked_number_deleted: "%{number} removed from Do Not Call list for %{level}"
+  caller_id_blank: "When you make calls with this campaign, you need a phone number to use for the Caller ID. Enter the phone number you want to use for your Caller ID and click Verify. To prevent abuse, the system will call that number and ask you to enter a validation code that will appear on your screen. Until you do this, you can't make calls with this campaign."
+  # inviting a new administrator
+  admin_invite_subject: "Set your password for %{title}"
+  admin_invite_body_html: "Click here to set your password: %{link}. This link expires 24 hours after it was sent."
+  admin_invite_body_text: "Click here to set your password: %{link}. This link expires 24 hours after it was sent."
+  unpaid_text: "Before you can make calls, you need to verify a credit card number that we can bill. Until then, you can try out as much as you like, except for actually calling. %{billing_link}"
+  credit_card_declined: "Please update your %{billing_link} and then %{add_to_balance_link} or %{configure_auto_recharge_link}. If your balance fall below $0, you won't be able to make more phone calls"
+  updated_tos: "We've updated our Terms of Service. You need to agree to the new terms before continuing."
+  unactivated_text: "To prevent abuse, new users must call the support phone number at the bottom of your screen to activate your account."
+  voter_list_upload_succeeded_subject: "Your list %{list_name} upload succeeded."
+  voter_list_upload_failed_subject: "Your list %{list_name} upload failed."
+  voter_list_upload_scheduled: "Your list upload is processing. You will receive an email when it is complete. If you've added any custom fields, <a href=\"%{url}\">please update your script</a>."
+  campaign_time_period_exceed: "You can only call this campaign between %{start_time} and %{end_time}. Please try back during those hours."
+  campaign_has_no_more_voters: "There are no more numbers to call in this campaign."
+  caller_instruction_choice: "Press star to begin dialing or pound for instructions."
+  re_assign_caller_to_another_campaign: "You have been re-assigned to %{campaign_name}."
+  phones_only_caller_instructions: "After these instructions, you will be placed on hold. When someone answers the phone, the hold music will stop. You usually won't hear the person say hello, so start talking immediately. At the end of the conversation, do not hang up your phone. Instead, press star to end the call, and you will be given instructions on how to enter your call results."
+  read_voter_name: "%{first_name} %{last_name}. Press star to dial or pound to skip."
+  read_star_to_dial_pound_to_skip: "Press star to dial or pound to skip."
+  submit_results: "Then press star to submit your result."
+  flash_missing_html: "Because you do not have an up-to-date version of Adobe Flash, you must dial in. If you would like to use the browser phone, please <a href=\"http://get.adobe.com/flashplayer/\">click here</a> to download and install the most recent version of Flash."
+  flash_old_html: "Because you do not have an up-to-date version of Adobe Flash, you must dial in. If you would like to use the browser phone, please <a href=\"http://get.adobe.com/flashplayer/\">click here</a> to download and install the most recent version of Flash."
+  client_not_ready: "We could not load the browser phone. Please check your firewall settings or anything else that could be blocking access."
+  browser_unsupported: "Your browser is out of date or not supported. Please download <a href='https://www.google.com/chrome/'>Google Chrome (11+)</a>, <a href='http://www.apple.com/safari/'>Apple Safari (5+)</a>, <a href='http://www.mozilla.org/en-US/firefox/new/'>Mozilla Firefox (3.6+)</a>, or <a href='http://windows.microsoft.com/en-US/internet-explorer/downloads/ie'>Microsoft Internet Explorer (7+)</a>."
+  javascript_disabled: "We could not load JavaScript. Please check your browser settings and reload this page."
+  invalid_file_uploaded: "Your file is corrupt or has a problem. Please try saving the data into a new comma-separated value (CSV) or tab-delimited text (TXT) file and then try again."
+  client_report_processing: "Your report is currently being prepared for download. When it is ready, you will receive an email and the counter under \"Download Reports\" will increase by 1."
+  report_ready_for_download: "Your report is ready for download."
+  report_error_occured_subject: "Error generating report."
+  report_error_occured: "There was a problem generating a report for your campaign. Support has been notified and is looking into the issue."
+  script_cannot_be_archived: "This script cannot be archived, as it is currently assigned to an active campaign."
+  script_cannot_be_modified: "You cannot change the script as this campaign has already been called with the existing script."
+  identical_caller_on_call: "Another user is logged in as this caller. Only one user may log in as the same caller at the same time."
+  invalid_date_format: "Sorry, that wasn't a valid date range."
+  admin_access: "Only an administrator can access this page."
+  failure_change_role: "Sorry, you can't change your own role."
+  success_change_role: "Updated user role successfully."
+  campaign_out_of_phone_numbers: "This campaign has run out of phone numbers."
+  update_billing_info: "Urgent: Update your billing information"
+  enjoy_the_trial: "Enjoy your trial of Impact Dialing! You have 50 minutes of calling for free. Make sure to %{billing_link} before your minutes run out."
+  csv_missing_header_or_rows: "Please verify the file contains at least 1 header row and 1 data row."
+  csv_duplicate_headers: "The uploaded file contained the following duplicate headers: %{duplicate_headers}. Please verify all header names are unique."
+  csv_is_invalid: "Invalid CSV file. Could not import."
+  dialer:
+    twiml:
+      caller:
+        pin_prompt: "Please enter your pin and then press star."
+        pin_invalid: "Incorrect pin."
+        calling_is_disabled: "Calling has been disabled for this account. Please contact your account administrator for assistance."
+        account_has_no_funds: "There are no funds available in the account. Please contact your account administrator for assistance."
+        time_period_exceeded: "You can only call this campaign between %{start_time} and %{end_time}."
+        subscription_limit: "The maximum number of callers for this account has been reached. Wait for another caller to finish, or ask your administrator to upgrade your account."
+        unprocessable_fallback_url: "We are unable to complete your call at this time. Please hangup and try again."
+        campaign_missing: "You have entered the correct pin but your account is not assigned to an active campaign. Please contact your account administrator."
+        instruction_choice: "Press star to begin dialing or pound for instructions."
+    access:
+      denied: "Calling is disabled. Please contact your admin."
+    account:
+      not_funded: "Your account is not funded. Please contact your admin."
+    campaign:
+      out_of_numbers: "This campaign has run out of phone numbers."
+      time_period_exceeded: "You can only call this campaign between %{start_time} and %{end_time}."
+    message_drop:
+      failed: "The message drop failed. If the other party is still connected, please try again. If the other party has already disconnected, please hang-up or save your call results to continue. We have been notified of the error."
+
+  account_usages:
+    create:
+      success: 'Your report will be generated in turn. It may take several minutes. You will get an email when it is ready.'
+      report_type_required: 'Please select a report type.'
+      from_date_required: 'Please enter a from date.'
+      to_date_required: 'Please enter a to date.'
+  subscriptions:
+    autorecharge:
+      update: "Autorecharge settings saved."
+      invalid_settings: "Numbers entered must be greater than zero."
+    contract:
+      invalid_settings: "Price per quantity must be >= 0.02 or <= 0.10"
+    upgrade:
+      success: 'Subscription plan updated successfully.'
+      payment_info_required: 'Please fill out your payment information before upgrading.'
+    update_billing:
+      success: 'Billing info updated successfully.'
+    add_funds:
+      success: 'The amount has been added to your balance.'
+    nothing_to_do: 'It looks like you submitted details that match your current plan so we did not change anything.'
+    cancelled: 'Subscription cancelled successfully. Administrators can still login but with limited features.'
+  stripe:
+    invalid_request_error: "There was an error processing your payment. Verify your payment info is up to date and try again. Please contact support if this problem continues."
+    api_error: "We hit a temporary glitch processing your payment. Try again. Please contact support if this problem continues."
+  billing:
+    plans:
+      transition_errors:
+        amount_paid: "Please enter the amount of USD dollar amount of minutes to purchase."
+        callers_allowed: "Please enter a number of callers greater than zero."
+  white_labeling:
+
+    impactdialing:
+      title: "Impact Dialing"
+      full_title: "Impact Dialing, LLC"
+      phone: "(503) 564-8072"
+      email: "support@impactdialing.com"
+      billing_link: "/client/billing"
+      add_to_balance_link: "/client/add_to_balance"
+      configure_auto_recharge_link: "/client/recharge"
+
+    callspex:
+      title: "CallSpex"
+      full_title: "CallSpex"
+      phone: "267-974-6326"
+      email: "howard@moseleyllc.com"
+      billing_link: ""
+    stonesphonesdialer:
+      title: "Stones' Phones"
+      full_title: "Campaign Communication Solutions, Inc. d/b/a Stones' Phones"
+      phone: "(202) 393-4626"
+      email: "info@stonesphones.com"
+      billing_link: ""
+    afpdialer:
+      title: "Americans for Prosperity"
+      full_title: "Americans for Prosperity"
+      phone: "(415) 347-5723"
+      email: "afpdialer@impactdialing.com"
+      billing_link: ""
+    gettangent:
+      title: "Tangent | The Insurance Agent's Dialer"
+      full_title: "Simple Shapes, LLC"
+      phone: "(888) 593-2021"
+      email: "support@gettangent.com"
+      billing_link: "https://tangent.chargevault.com/create"
+    activistcentral-lfpd:
+      title: "Activist Central"
+      full_title: "Activist Central Labor Friendly Predictive Dialer"
+      phone: "505.238.8188"
+      email: "matthew.taylor@activistcentral.net"
+      billing_link: ""

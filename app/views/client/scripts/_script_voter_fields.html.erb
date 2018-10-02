@@ -1,0 +1,18 @@
+<fieldset data-intro="Next, choose what information to display about your leads." data-step="2">
+  <legend>Display for each lead</legend>
+  <ul class="clearfix">
+    <% voter_fields.try(:each_with_index) do |field, index| %>
+      <li>
+        <label for="script_voter_field_<%= index %>">
+          <input type="checkbox"
+                 name="voter_field[]"
+                 value="<%= field %>"
+                 id="script_voter_field_<%= index %>"
+                 <% if voter_field_values.try(:index, field) %>checked<% end %>>
+            <%= field %>
+          </input>
+        </label>
+      </li>
+    <% end %>
+  </ul>
+</fieldset>

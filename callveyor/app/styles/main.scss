@@ -1,0 +1,260 @@
+$gray-lighter: lighten(#000, 90%);
+
+.ng-cloak {
+    display: none;
+}
+
+.browsehappy {
+    margin: 0.2em 0;
+    background: #ccc;
+    color: #000;
+    padding: 0.2em 0;
+}
+
+/* Font sizes */
+.small-text {
+    font-size: 11px;
+    font-weight: bold;
+}
+
+/* Status messages */
+.status {
+    font-size: 120%;
+}
+.call-in-phone {
+    margin-top: auto;
+}
+.call-status {
+    margin-left: 35px;
+}
+.slim-alert {
+    margin: 2px;
+    padding: 3px;
+}
+
+/* Lists */
+ol.bump-left {
+    padding-left: 20px;
+}
+
+/* Spacing for header */
+body {
+    padding-top: 60px;
+}
+
+/* Prevent 3 pieces of footer content from stacking */
+footer {
+  padding-left: 0;
+  ul, li {
+    display: inline-block;
+  }
+  li {
+    list-style: none;
+
+    a, span {
+      line-height: 20px;
+      position: relative;
+      display: block;
+      padding: 10px 15px;
+    }
+  }
+}
+
+/* Wrapper for .container.fluid */
+.fluid-wrap {
+    padding: 0 15px 60px 15px;
+}
+
+/* Scrollable content boxes */
+// .content-box {
+//     max-height: 600px;
+//     overflow-y: scroll;
+// }
+// @media (max-width: 768px) {
+//   .content-box {
+//       max-height: 180px;
+//       overflow-y: auto;
+//   }
+// }
+// @media (max-height: 1100px) {
+//     .content-box {
+//         max-height: 960px;
+//     }
+// }
+// @media (max-height: 1000px) {
+//     .content-box {
+//         max-height: 760px;
+//     }
+// }
+// @media (max-height: 900px) {
+//     .content-box {
+//         max-height: 660px;
+//     }
+// }
+// @media (max-height: 700px) {
+//     .content-box {
+//         max-height: 590px;
+//     }
+// }
+
+.veil {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height:100%;
+    width:100%;
+    cursor: not-allowed;
+    filter: alpha(opacity=60);
+    opacity: 0.6;
+    background: #000000;
+    z-index: 1;
+}
+
+.label-info {
+    color: lighten(#000, 30%);
+}
+
+nav.navbar-fixed-top div.border-top-thin {
+    margin-top: 3px;
+    border-top: solid 1px #999;
+}
+
+nav.navbar-fixed-top .alert {
+    margin: 0;
+    margin-top: 10px;
+    padding: 5px 8px;
+}
+
+ul.nav.navbar-nav.add-gutter {
+    li {
+        margin-left: 5px;
+    }
+}
+.navbar-nav {
+  float: left;
+  margin: 0;
+}
+.navbar-nav > li {
+  float: left;
+}
+.navbar-nav.navbar-right:last-child {
+  margin-right: -15px;
+}
+.navbar-text {
+  margin-left: 0;
+}
+
+.script {
+    padding-top: 10px;
+}
+
+.fixed-contact-container {
+  margin-left: -250px;
+  left: 250px;
+  width: 33%;
+  position: fixed;
+  height: 100%;
+  overflow-y: auto;
+  transition: all 0.4s ease 0s;
+}
+
+.fixed-contact {
+  position: absolute;
+  top: 0;
+  width: 95%;
+  list-style: none;
+  margin: 10px;
+  padding: 5px;
+}
+
+.fixed-messages-container {
+    position: fixed;
+    z-index: 1000;
+    transition: all 0.4s ease 1s;
+    right: 0;
+}
+
+.fixed-messages {
+    text-align: center;
+    width: 175px;
+}
+@media (max-width: 991px) {
+  .navbar-nav {
+    margin-top: 7.5px;
+    margin-bottom: 0;
+  }
+  button.navbar-btn {
+    margin: 0;
+    span.text {
+      display: none;
+    }
+  }
+  footer ul {
+      p:first-child {
+          padding-right: 25px;
+      }
+      li {
+        a, span {
+          padding-top: 4px; // @media (min-width: 768px)
+          padding-bottom: 4px; // @media (min-width: 768px)
+        }
+      }
+  }
+  .fixed-contact-container {
+      position: relative;
+      height: auto;
+      margin: 15px 0;
+      width: auto;
+      left: 0;
+  }
+  .fixed-contact {
+      position: relative;
+      width: auto;
+      margin: auto;
+      padding: auto;
+      top: 0;
+  }
+}
+@media (min-width: 992px) {
+    button.navbar-btn {
+      margin: 8px 0;
+      span.text {
+        display: normal;
+      }
+    }
+    footer {
+      text-align: center;
+      margin: 0; 
+
+      li {
+        a, span {
+          padding-top: 15px;
+          padding-bottom: 15px;
+        }
+      }
+    }
+    .dl-horizontal {
+        dt {
+            width: 35%;
+            margin-left: 3%;
+        }
+        dd {
+            width: 45%;
+            margin-left: 40%;
+        }
+    }
+}
+
+.glyphicon.glyphicon-play, .glyphicon.glyphicon-ok, .glyphicon.glyphicon-flash {
+  color: green;
+}
+.glyphicon.glyphicon-exclamation-sign {
+  color: #c23634;
+}
+.glyphicon.glyphicon-pause {
+  color: #456587;
+}
+
+button > .glyphicon.glyphicon-play {
+  color: white;
+}

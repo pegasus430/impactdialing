@@ -1,0 +1,70 @@
+<h1><%= @campaign.name %> Answered Calls Report</h1>
+
+<% total_answers = 0 %>
+
+<div role="main" data-intro="This report shows you how people answered each of the questions in your script for this campaign." data-step="1">
+  <% if @results.empty? %>
+    <p>This campaign has not had any calls answered yet.</p>
+  <% else %>
+    <% si = 1 %>
+    <% @results.each do |script, data| %>
+      <h2 id="script_heading_<%= si %>"><%= "Script: #{data[:script]}" %></h2>
+      <%= render 'shared/answer_call_details', {
+        answer_stats: data[:questions],
+        answer_counter: -> (n) { total_answers += n }
+      } %>
+      
+      <% si += 1 %>
+    <% end %>
+
+    <% unless @transfers.blank? %>
+      <h3>Transfers</h3>
+      <table>
+        <tr>
+          <th>Transfer</th>
+          <th>Number</th>
+          <th>Percentage</th>
+        </tr>
+        <% i = 1 %>
+        <% @transfers.each_value do |value| %>
+        <tr id="transfer_<%= i %>">
+          <td><%= value[:label]%></td>
+          <td><%= value[:number]%></td>
+          <td><%= value[:percentage]%> %</td>
+        </tr>
+        <% i += 1 %>
+        <%end%>
+      </table>
+    <% end %>
+
+    <% unless (drops = @campaign.call_attempts.with_recording.with_auto_message_drop).count.zero? %>
+    <h3>Messages Left</h3>
+    <table>
+      <tr>
+        <th>Recording</th>
+        <th>Number</th>
+        <th>Percentage (of answered calls)</th>
+      </tr>
+      <% recording_ids = drops.map(&:recording_id)
+         messages = Recording.where(id: recording_ids)
+         i = 1 %>
+      <% messages.each do |message| %>
+        <tr id="recording_<%= i %>">
+          <td><%= message.name %></td>
+          <td><%= drops.count %></td>
+          <td><%= ((drops.count / total_answers.to_f) * 100.0).to_i %>%</td>
+        </tr>
+        <% i += 1 %>
+      <% end %>
+    </table>
+    <% end %>
+
+    <%= render('selective_date_range_picker', {
+      datepicker_path: answer_client_reports_path,
+      campaign_id: @campaign.try(:id),
+      campaign: @campaign,
+      from_date: @date_range.from,
+      to_date: @date_range.to
+    }) %>
+  <% end %>
+</div>

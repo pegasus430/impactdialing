@@ -1,0 +1,28 @@
+GEM
+  remote: http://rubygems.org/
+  specs:
+    activemodel (3.0.10)
+      activesupport (= 3.0.10)
+      builder (~> 2.1.2)
+      i18n (~> 0.5.0)
+    activerecord (3.0.10)
+      activemodel (= 3.0.10)
+      activesupport (= 3.0.10)
+      arel (~> 2.0.10)
+      tzinfo (~> 0.3.23)
+    activesupport (3.0.10)
+    arel (2.0.10)
+    builder (2.1.2)
+    daemons (1.0.10)
+    i18n (0.5.0)
+    mysql (2.8.1)
+    tzinfo (0.3.31)
+
+PLATFORMS
+  java
+  ruby
+
+DEPENDENCIES
+  activerecord (= 3.0.10)
+  daemons (~> 1.0.1)
+  mysql (~> 2.8.1)

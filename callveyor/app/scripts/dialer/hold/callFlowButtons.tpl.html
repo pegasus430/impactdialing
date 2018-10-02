@@ -1,0 +1,29 @@
+<button class="btn btn-primary navbar-btn"
+        type="button"
+        title="Dial the current contact."
+        aria-label="Dial the current contact."
+        data-ng-click="hold.dial()"
+        data-ng-if="hold.campaign.type == 'Preview'"
+        data-ng-disabled="transitionInProgress">
+  <span class="glyphicon glyphicon-play" aria-hidden="true"></span>
+  <span class="text">Dial</span>
+</button>
+<button class="btn btn-primary navbar-btn"
+        type="button"
+        title="Skip the current contact."
+        aria-label="Skip the current contact."
+        data-ng-click="hold.skip()"
+        data-ng-if="hold.campaign.type == 'Preview'"
+        data-ng-disabled="transitionInProgress">
+  <span class="glyphicon glyphicon-forward" aria-hidden="true"></span>
+  <span class="text">Skip</span>
+</button>
+<button class="btn btn-primary navbar-btn"
+        type="button"
+        title="Stop making calls."
+        aria-label="Stop making calls."
+        data-ng-click="hold.stopCalling()"
+        data-ng-disabled="transitionInProgress">
+  <span class="glyphicon glyphicon-stop" aria-hidden="true"></span>
+  <span class="text">Stop calling</span>
+</button>

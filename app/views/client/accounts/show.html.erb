@@ -1,0 +1,25 @@
+<nav role="navigation" class="actions clearfix">
+  <ul class="clearfix">
+    <li>
+      <a class="action primary" href="#administrators">Add users</a>
+    </li>
+    <li>
+      <a class="action secondary" href="#api_key">Generate API key</a>
+    </li>
+    <% if !logged_in_as_client? || @user.administrator? %>
+      <% if !white_labeled_billing_link(domain).empty? %>
+    <li>
+      <a class="action secondary" href="<%= white_labeled_billing_link(request.domain) %>">Billing</a>
+    </li>
+      <% end %>
+    <% end %>
+  </ul>
+</nav>
+
+<%= render :partial => 'client/users/edit' %>
+
+<% unless @user.new_record? %>
+  <%= render :partial => 'client/users/show' %>
+  <%# fixme this feature no longer exists. remove all references to caller_password - mostly just deleting code, but also needs a migration. render :partial => 'client/accounts/caller_password' %>
+  <%= render :partial => 'client/accounts/api_key' %>
+<% end %>
