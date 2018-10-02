@@ -2,14 +2,15 @@ source 'https://rubygems.org'
 
 ruby '2.3.1'
 
-gem 'dotenv-rails', :groups => [:development, :test]
+# gem 'dotenv-rails', :groups => [:development, :test]
+gem 'figaro'
 gem 'rails', '~> 4.0.0'
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
 gem 'sass-rails'
 gem 'compass-rails'
 gem 'introjs-rails'
-gem 'puma', '~> 3.6.0'
+gem 'puma'
 gem 'rack-timeout'
 gem 'state_machine'
 
